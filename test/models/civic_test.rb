@@ -5,6 +5,11 @@ class CivicTest < ActiveSupport::TestCase
     assert true
   end
 
+  test "channels method" do
+    # civic1 = Civic.create!
+    # # civic1.channels
+    # byebug
+  end
 
 
 

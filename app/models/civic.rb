@@ -1,7 +1,12 @@
 class Civic < ActiveRecord::Base
-#
-#
-# def find_twitter
-#   @address["current_observation"]["temp_f"]
-# end
+
+  def channels
+  responsex = @response["officials"]
+  channels = []
+  responsex.each do |q|
+    channels << responsex["channels"]
+    end
+    byebug
+  end
+
 end
