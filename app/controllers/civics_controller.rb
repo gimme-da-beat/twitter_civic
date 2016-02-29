@@ -1,8 +1,9 @@
 class CivicsController < ApplicationController
   def index
     address = params["address"]
-    feature_display = Civic.new(address)
-    feature_display.extract_twitter
+    network = params["network"]
+    feature_display = Civic.new(address, network)
+    feature_display.extract_network(network)
     feature_display.extract_state
     feature_display.extract_full_names_and_photos
     render json:feature_display.combiner

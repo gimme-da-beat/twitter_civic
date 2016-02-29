@@ -1,31 +1,31 @@
 class Civic < ActiveRecord::Base
-  def initialize(address)
+  def initialize(address, network)
     @response = HTTParty.get("https://www.googleapis.com/civicinfo/v2/representatives?address=#{address}&key=#{ENV["GOOGLE_KEY"]}")
     @combined = []
     @state_from_google = ""
     @full_names = []
     @photo_url = []
-    @twitter_refined = []
+    @network_refined = []
   end
 
-  def extract_twitter
-    twitter_dirty = []
+  def extract_network(network)
+    network_dirty = []
     @response["officials"].each do |qz|
       if qz["channels"] ==  nil
       elsif !qz["channels"].empty?
         qz["channels"].each do |y|
           y.each do |z|
-            if z.include?("Twitter")
-              twitter_dirty << y
+            if z.include?(network)
+              network_dirty << y
             end
           end
         end
       end
     end
-    twitter_dirty.each do |xxx|
-      if xxx.values[1] == "whitehouse"
+    network_dirty.each do |xxx|
+      if xxx.values[1] == "whitehouse" || xxx.values[1] == "+whitehouse"
       else
-        @twitter_refined << xxx.values[1]
+        @network_refined << xxx.values[1]
       end
     end
   end
@@ -49,7 +49,7 @@ class Civic < ActiveRecord::Base
   end
 
   def combiner
-    @combined << @twitter_refined
+    @combined << @network_refined
     @combined << @full_names
     @combined << @photo_url
   end
