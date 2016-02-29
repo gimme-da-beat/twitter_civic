@@ -1,28 +1,25 @@
-== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Civic api
+This is an api we created in a Ruby on Rails app that uses the Google Civics api combined with the Open States api to output json containing the full names and photographs of elected representatives from your state as well as the network usernames for any elected representatives from your state.
 
-Things you may want to cover:
+The network usernames are gleaned from the Google Civic Information api. (https://developers.google.com/civic-information/)
+which is gotten using ("https://www.googleapis.com/civicinfo/v2/representatives?address=)
+and we pass in the state information from the google civic into the open state api.
 
-* Ruby version
+The full names and photographs are provided by the Open states api.
+(http://sunlightlabs.github.io/openstates-api/index.html)
 
-* System dependencies
+which is gotten using ("http://openstates.org/api/v1/legislators/?state=)
 
-* Configuration
+The network usernames are gleaned from the Google Civic Information api. (https://developers.google.com/civic-information/)
+which is gotten using ("https://www.googleapis.com/civicinfo/v2/representatives?address=)
 
-* Database creation
+##How it works
+The way our api works is you take your address and put it in the browser address bar like so (http://localhost:3000/civics/index?address=151+skipwith+dr)
+So you would type in your address after the = with a + in between spaces in the address.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+possible networks:
+Facebook
+Twitter
+GooglePlus
+YouTube
